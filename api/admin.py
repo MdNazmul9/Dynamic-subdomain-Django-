@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from  .models import  Tanent, Member
+from  .models import  Institute, Member
 
-admin.site.register(Tanent)
+admin.site.register(Institute)
 admin.site.register(Member)

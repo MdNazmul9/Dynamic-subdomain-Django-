@@ -3,19 +3,14 @@ from django.conf import settings
 from django.contrib.auth.models import User
 # Create your models here.
 import os
-class Tanent(models.Model):
+class Institute(models.Model):
     name = models.CharField(max_length=255)
     subdomain = models.CharField(max_length=255)
-
     class Meta:
-        # db_table = 'Tanent'
-        # managed = True
-        # verbose_name = 'tanent'
-        # verbose_name_plural = 'tanents'
         ordering = ('-id',)
 
     def save(self, *args, **kwargs):
-        super(Tanent, self).save(*args, **kwargs)
+        super(Institute, self).save(*args, **kwargs)
         with open('/etc/hosts', 'rt') as f:
             # newdomain = self.subdomain+settings.ALLOWED_HOSTS[2]
             newdomain = self.subdomain+'.example.com'
@@ -30,12 +25,12 @@ class Tanent(models.Model):
         return str(self.subdomain)
 
         
-class TanentAware(models.Model):
-    tanent = models.ForeignKey(Tanent, on_delete=models.CASCADE)
+class InstituteAware(models.Model):
+    institute = models.ForeignKey(Institute, on_delete=models.CASCADE)
 
-class Member(TanentAware):
+class Member(InstituteAware):
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
 
     def __str__(self):
         return str(self.name)
