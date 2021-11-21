@@ -6,6 +6,8 @@ import os
 class Institute(models.Model):
     name = models.CharField(max_length=255)
     subdomain = models.CharField(max_length=255)
+    controller = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='controller')
+
     class Meta:
         ordering = ('-id',)
 
@@ -27,8 +29,7 @@ class Institute(models.Model):
         
 class InstituteAware(models.Model):
     institute = models.ForeignKey(Institute, on_delete=models.CASCADE)
-    controller = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='controller')
-
+    
 
 class Member(InstituteAware):
     name = models.CharField(max_length=255)
