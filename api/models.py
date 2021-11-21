@@ -16,7 +16,7 @@ class Institute(models.Model):
             newdomain = self.subdomain+'.example.com'
             # print(newdomain)
             # settings.ALLOWED_HOSTS.append(newdomain)
-            s = f.read() + '\n' + '127.0.0.1\t%s\n'%newdomain
+            s = f.read() + '\n' + '127.0.0.1\t%s'%newdomain
             with open('/tmp/etc_hosts.tmp', 'wt') as outf:
                 outf.write(s)
 
@@ -27,10 +27,12 @@ class Institute(models.Model):
         
 class InstituteAware(models.Model):
     institute = models.ForeignKey(Institute, on_delete=models.CASCADE)
+    controller = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True, related_name='controller')
+
 
 class Member(InstituteAware):
     name = models.CharField(max_length=255)
-    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True, related_name='creator')
 
     def __str__(self):
         return str(self.name)
