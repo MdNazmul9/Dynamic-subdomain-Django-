@@ -1,11 +1,12 @@
-<h1>Institute Name: {{institute.name}}</h1>
-<h1>Controller: {{institute.controller.username}}</h1>
-<h1>Controller email: {{institute.controller.email}}</h1>
+<h1>Institute Name: <u>{{institute.name}}</u></h1>
+<h4>Controller: {{institute.controller.username}}</h4>
+<h4>Controller email: {{institute.controller.email}}</h4>
 
-<h2>Our members</h2>
+<h2>The members of <b>'{{institute.name}}'</b></h2>
+
 <ul>
 {% for i in members %}
-<h1>{{i.name}}</h1>added by:{{i.user}}
+<h3>{{i.name}}</h3>added by:{{i.user}}
 <hr>
 {% endfor %}
 </ul>

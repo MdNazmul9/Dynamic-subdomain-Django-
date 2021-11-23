@@ -15,7 +15,7 @@ class Institute(models.Model):
         super(Institute, self).save(*args, **kwargs)
         with open('/etc/hosts', 'rt') as f:
             # newdomain = self.subdomain+settings.ALLOWED_HOSTS[2]
-            newdomain = self.subdomain+'.example.com'
+            newdomain = self.subdomain+'.edubd.app'
             # print(newdomain)
             # settings.ALLOWED_HOSTS.append(newdomain)
             s = f.read() + '\n' + '127.0.0.1\t%s'%newdomain
